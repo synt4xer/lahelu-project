@@ -1,0 +1,51 @@
+{
+  "name": "lahelu-project",
+  "version": "1.0.0",
+  "main": "dist/app.js",
+  "license": "MIT",
+  "scripts": {
+    "db:generate": "drizzle-kit generate:pg",
+    "db:migrate": "ts-node src/database/migrate.ts",
+    "db:studio": "drizzle-kit studio",
+    "dev": "nodemon src/app.ts",
+    "start": "node src/app.ts",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
+    "test:e2e": "jest tests/e2e",
+    "test:coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.38.2",
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.2",
+    "@types/pg": "^8.11.10",
+    "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "drizzle-kit": "^0.30.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-prettier": "^0.0.0-empty",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}

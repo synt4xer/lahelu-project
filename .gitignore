@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+*.js.map
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
