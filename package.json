@@ -4,7 +4,7 @@
   "main": "dist/app.js",
   "license": "MIT",
   "scripts": {
-    "db:generate": "drizzle-kit generate:pg",
+    "db:generate": "drizzle-kit generate",
     "db:migrate": "ts-node src/database/migrate.ts",
     "db:studio": "drizzle-kit studio",
     "dev": "nodemon src/app.ts",
