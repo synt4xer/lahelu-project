@@ -24,10 +24,13 @@ export const posts = pgTable(
     updatedAt: timestamp('updated_at').notNull().defaultNow(),
   },
   (table) => [
+    // foreign key
     foreignKey({
       columns: [table.userId],
       foreignColumns: [users.id],
     }),
+
+    // composite index
     index('posts_cursor_user_idx').on(table.createdAt.desc(), table.id, table.userId),
     index('posts_privacy_time_idx').on(table.isPrivate, table.createdAt.desc(), table.id),
   ],
