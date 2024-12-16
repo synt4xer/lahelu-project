@@ -15,6 +15,13 @@
       "when": 1734360436737,
       "tag": "0001_absurd_ender_wiggin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1734363045403,
+      "tag": "0002_absent_firelord",
+      "breakpoints": true
     }
   ]
 }
