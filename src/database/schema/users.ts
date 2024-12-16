@@ -1,4 +1,4 @@
-import { pgTable, serial, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
+import { index, pgTable, serial, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -9,6 +9,9 @@ export const users = pgTable('users', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 }, (table) => [
   uniqueIndex('username_idx').on(table.username),
+  
+  //cursor index
+  index('users_cursor_idx').on(table.createdAt.desc(), table.id, table.username)
 ]);
 
 export type User = typeof users.$inferSelect;
