@@ -1,0 +1,33 @@
+services:
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=production
+      - API_BASE_PATH=/api
+      - SALT=10
+      - JWT_SECRET=5Dh3y3CENkKzvvQteivHjgi7UBJoCy1h
+      - JWT_EXPIRED_TIME=2h
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_DATABASE=lahelu-dev
+      - S3_BUCKET_NAME=your_bucket_name
+      - S3_REGION=your_region
+      - S3_ACCESS_KEY=your_access_key
+      - S3_SECRET_KEY=your_secret_key
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: lahelu-dev
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
