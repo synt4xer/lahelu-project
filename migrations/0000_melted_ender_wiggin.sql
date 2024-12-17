@@ -8,4 +8,5 @@ CREATE TABLE "users" (
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX "username_idx" ON "users" USING btree ("username");--> statement-breakpoint
+CREATE INDEX "users_username_idx" ON "users" USING btree ("username","password");--> statement-breakpoint
 CREATE INDEX "users_cursor_idx" ON "users" USING btree ("created_at" DESC NULLS LAST,"id","username");

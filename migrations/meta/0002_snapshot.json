@@ -1,6 +1,6 @@
 {
-  "id": "19dc883a-d338-4156-9dbf-629ebf3e56ab",
-  "prevId": "02f17e6c-09e0-4e87-8afc-01e3e66e4a08",
+  "id": "2beaf34c-f3df-4263-8a33-6894c629542d",
+  "prevId": "463ce3d9-ca1c-4f2a-b7ec-39195d510089",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -346,6 +346,27 @@
             }
           ],
           "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "users_username_idx": {
+          "name": "users_username_idx",
+          "columns": [
+            {
+              "expression": "username",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "password",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
           "concurrently": false,
           "method": "btree",
           "with": {}
