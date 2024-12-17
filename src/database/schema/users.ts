@@ -14,7 +14,8 @@ export const users = pgTable(
     // unique index
     uniqueIndex('username_idx').on(table.username),
 
-    // cursor index
+    // composite index
+    index('users_username_idx').on(table.username, table.password),
     index('users_cursor_idx').on(table.createdAt.desc(), table.id, table.username),
   ],
 );

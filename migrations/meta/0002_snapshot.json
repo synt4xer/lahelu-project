@@ -1,6 +1,6 @@
 {
-  "id": "19dc883a-d338-4156-9dbf-629ebf3e56ab",
-  "prevId": "02f17e6c-09e0-4e87-8afc-01e3e66e4a08",
+  "id": "c8ebfa33-aac8-4397-bf6e-4d0eb485d7cf",
+  "prevId": "463ce3d9-ca1c-4f2a-b7ec-39195d510089",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -125,21 +125,6 @@
             "user_id"
           ],
           "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "comments_post_id_user_id_posts_id_id_fk": {
-          "name": "comments_post_id_user_id_posts_id_id_fk",
-          "tableFrom": "comments",
-          "tableTo": "posts",
-          "columnsFrom": [
-            "post_id",
-            "user_id"
-          ],
-          "columnsTo": [
-            "id",
             "id"
           ],
           "onDelete": "no action",
@@ -346,6 +331,27 @@
             }
           ],
           "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "users_username_idx": {
+          "name": "users_username_idx",
+          "columns": [
+            {
+              "expression": "username",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "password",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
           "concurrently": false,
           "method": "btree",
           "with": {}

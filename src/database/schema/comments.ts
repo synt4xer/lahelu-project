@@ -15,8 +15,13 @@ export const comments = pgTable(
   (table) => [
     // foreign key
     foreignKey({
-      columns: [table.postId, table.userId],
-      foreignColumns: [posts.id, users.id],
+      columns: [table.postId],
+      foreignColumns: [posts.id],
+    }),
+
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [users.id],
     }),
 
     // composite index
