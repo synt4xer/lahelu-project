@@ -13,10 +13,13 @@ export const comments = pgTable(
     updatedAt: timestamp('updated_at').notNull().defaultNow(),
   },
   (table) => [
+    // foreign key
     foreignKey({
       columns: [table.postId, table.userId],
       foreignColumns: [posts.id, users.id],
     }),
+
+    // composite index
     index('comments_post_time_idx').on(table.postId, table.createdAt.desc(), table.id),
     index('comments_user_time_idx').on(table.userId, table.createdAt.desc(), table.id),
   ],
