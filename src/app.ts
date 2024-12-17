@@ -18,12 +18,18 @@ app.use(express.json());
 
 app.use(httpLogger);
 
+// basic api for root
+app.get('/', (_req: Request, res: Response) => {
+  res.status(200).json({ status: 'hi, i am alive!', timestamp: new Date().toISOString() });
+});
+
 // Health check endpoint
 app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({ status: 'healthy' });
 });
 
-// here to add routes from /src/routes
+// here to add routes
+require('./routes')(app);
 
 // Fallback for errors, undefined routes
 app.use(errorHandler);
