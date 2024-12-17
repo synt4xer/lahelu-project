@@ -3,7 +3,7 @@ export class AppError extends Error {
     public code: string,
     public message: string,
     public statusCode: number = 500,
-    public details?: any
+    public details?: any,
   ) {
     super(message);
     this.name = this.constructor.name;
@@ -14,6 +14,12 @@ export class AppError extends Error {
 export class NotFoundError extends AppError {
   constructor(message: string = 'Resource not found') {
     super('NOT_FOUND', message, 404);
+  }
+}
+
+export class AuthTokenError extends AppError {
+  constructor(message: string = 'Authorization token missing') {
+    super('UNAUTHORIZED', message, 401);
   }
 }
 

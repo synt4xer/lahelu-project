@@ -6,7 +6,7 @@ const logFormat = (nfo: winston.Logform.TransformableInfo) => {
   const { timestamp, level, message, ...args } = nfo;
   return AppConstant.NODE_ENV == 'production'
     ? `${timestamp} - ${level}: ${message} ${
-        Object.keys(args).length ? JSON.stringify(args, null, 2) : ''
+        Object.keys(args).length ? JSON.stringify(args) : ''
       }`
     : `${timestamp} - ${level}: ${message}`;
 };
