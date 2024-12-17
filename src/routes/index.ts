@@ -18,7 +18,7 @@ module.exports = (app: Express) => {
 
       // if route is a function, register it
       if (route !== undefined) {
-        app.use(`/${AppConstant.API_BASE_PATH}/${routeName}`, route);
+        app.use(`${AppConstant.API_BASE_PATH}/${routeName}`, route);
       }
     }
   }
