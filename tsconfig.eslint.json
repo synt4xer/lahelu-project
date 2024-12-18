@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/**/*.ts",
+    "tests/**/*.ts",
+    "*.ts",
+    "*.js",
+    ".eslintrc.js",
+    "jest.config.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "migrations"
+  ],
+  "compilerOptions": {
+    "types": ["node", "jest"],
+    "noEmit": true
+  }
+}
