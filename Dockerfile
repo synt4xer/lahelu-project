@@ -24,6 +24,7 @@ ENV NODE_ENV production
 RUN yarn install --production
 
 COPY --from=builder /usr/src/app/dist ./dist
+COPY --from=builder /usr/src/app/migrations ./migrations
 
 EXPOSE 5000
 
