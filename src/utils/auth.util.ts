@@ -25,13 +25,26 @@ export class AuthUtil {
   }
 
   static verifyToken(token: string): User {
-    if (!token) {
+    if (!token || typeof token !== 'string') {
       throw new AuthTokenError();
     }
 
     try {
-      return jwt.verify(token, AppConstant.JWT_SECRET) as User;
+      const decodedToken = jwt.verify(token, AppConstant.JWT_SECRET);
+
+      if (typeof decodedToken === 'string') {
+        throw new AuthTokenError('Invalid token format');
+      }
+
+      if (!decodedToken.id || !decodedToken.username) {
+        throw new AuthTokenError('Token missing required fields');
+      }
+
+      return decodedToken as User;
     } catch (error) {
+      if (error instanceof AuthTokenError) {
+        throw error;
+      }
       throw new AuthTokenError('Invalid or expired token');
     }
   }

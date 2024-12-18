@@ -9,7 +9,6 @@ export class AuthService {
     const user = await this.userRepository.findByUsername(username);
 
     if (user) {
-      // throw new NotFoundError('User not found');
       const isValidPassword = await AuthUtil.validatePassword(password, user.password);
 
       if (!isValidPassword) {

@@ -10,13 +10,13 @@ module.exports = [
   eslintConfigs.recommended,
   {
     files: ['src/**/*.{ts,js}', 'tests/**/*.{ts,js}'],
-    ignores: ['**/*.config.{ts,js}', 'node_modules', 'dist', 'build'],
+    ignores: ['*.config.{ts,js}', 'node_modules', 'dist', 'build'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
-        project: './tsconfig.json',
+        project: './tsconfig.eslint.json',
       },
     },
     plugins: {

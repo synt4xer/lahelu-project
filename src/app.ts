@@ -29,11 +29,12 @@ app.get('/health', (_req: Request, res: Response) => {
 });
 
 // here to add routes
-require('./routes')(app);
+import routes from './routes';
+routes(app);
 
 // Fallback for errors, undefined routes
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+  console.log(`[server]: Server is running at http://localhost:${port}`);
 });
