@@ -1,23 +1,30 @@
-# Use Node.js official image
-FROM node:18.20.4
+FROM node:18.20.5-alpine AS builder
 
-# Set working directory
 WORKDIR /usr/src/app
 
-# Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock tsconfig.json ./
 
-# Install dependencies
 RUN yarn install
 
-# Copy source files
-COPY . .
+COPY src ./src
+COPY migrations ./migrations
 
-# Build TypeScript files
 RUN yarn build
 
-# Expose the port the app runs on
+
+FROM node:18.20.5-alpine
+
+WORKDIR /usr/src/app
+
+RUN mkdir -p /usr/src/app/uploads
+
+COPY package.json yarn.lock tsconfig.json ./
+
+ENV NODE_ENV production
+RUN yarn install --production
+
+COPY --from=builder /usr/src/app/dist ./dist
+
 EXPOSE 5000
 
-# Command to run the app
 CMD ["node", "dist/app.js"]
