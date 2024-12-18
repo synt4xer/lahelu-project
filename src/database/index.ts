@@ -3,6 +3,7 @@ import { AppConstant } from '../utils/constant';
 import { Logger } from 'drizzle-orm/logger';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { logger as customLogger } from '../utils/logger';
+import { migrate } from 'drizzle-orm/node-postgres/migrator';
 
 const pool = new Pool({
   host: AppConstant.DB_HOST,
@@ -11,6 +12,10 @@ const pool = new Pool({
   password: AppConstant.DB_PASSWORD,
   database: AppConstant.DB_DATABASE,
 });
+
+// migrator from drizzle-orm to automatically run migrations
+// used in this run this test project only
+migrate(drizzle(pool), { migrationsFolder: './migrations' });
 
 class MyLogger implements Logger {
   logQuery(query: string, params: unknown[]): void {
