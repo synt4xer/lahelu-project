@@ -17,7 +17,7 @@ export const authenticate = async (req: RequestWithUser, res: Response, next: Ne
     // Add user info to request object for use in subsequent middleware/routes
     req.user = {
       id: decoded.id,
-      username: decoded.username
+      username: decoded.username,
     };
 
     next();
