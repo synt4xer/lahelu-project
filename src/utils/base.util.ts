@@ -34,3 +34,25 @@ export const getContentType = (filePath: string): string => {
 
   return mimeType;
 };
+
+export const generateCursor = (date: Date, id: number): string => {
+  const cursorData = `${date.toISOString()}_${id}`;
+  return Buffer.from(cursorData).toString('base64');
+};
+
+export const parseCursor = (cursor: string | undefined): { date: Date; id: number } | null => {
+  if (!cursor) return null;
+  try {
+    const decodedCursor = Buffer.from(cursor, 'base64').toString();
+    const [dateStr, idStr] = decodedCursor.split('_');
+    const date = new Date(dateStr);
+    const id = parseInt(idStr);
+
+    if (isNaN(date.getTime()) || isNaN(id)) {
+      return null;
+    }
+    return { date, id };
+  } catch {
+    return null;
+  }
+};
