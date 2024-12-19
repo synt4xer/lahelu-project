@@ -15,11 +15,11 @@ services:
       - DB_USER=user
       - DB_PASSWORD=password
       - DB_DATABASE=lahelu-dev
-      - S3_BUCKET_CONTENT_NAME=vg-content-bucket
-      - S3_BUCKET_AVATAR_NAME=vg-avatar-bucket
-      - S3_REGION=ap-southeast-1
-      - S3_ACCESS_KEY=AKIA33OS7SODOA2IWSWS
-      - S3_SECRET_KEY=CqyU6nycC4jeqlniJ0OfQTE4God8U3MVX7SzdoUE
+      - S3_BUCKET_CONTENT_NAME=REDACTED
+      - S3_BUCKET_AVATAR_NAME=REDACTED
+      - S3_REGION=REDACTED
+      - S3_ACCESS_KEY=REDACTED
+      - S3_SECRET_KEY=REDACTED
     volumes:
       - ./uploads:/usr/src/app/uploads
     depends_on:
