@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "0612e707-da6a-4254-b804-d0848a18d6df",
+		"name": "Lahelu project",
+		"description": "A test project for Lahelu, a meme sharing platform.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40084898"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"jane_smith\",\n    \"password\": \"password456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJmZXJyZWxkZXYiLCJpYXQiOjE3MzQ2MTEyMTQsImV4cCI6MTczNDYxODQxNH0.GoXS529n5RE9UdccvYWGgiwOFCZ6Pv1LDQ7beD_Mvwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/syntaxer/Downloads/0B012157-AC88-4CE0-BC87-A0F6C5EA5B69.mov"
+						},
+						{
+							"key": "title",
+							"value": "ngapain pak",
+							"type": "text"
+						},
+						{
+							"key": "isPrivate",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get posts with pagination",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJmZXJyZWxkZXYiLCJpYXQiOjE3MzQ2MjE5NzAsImV4cCI6MTczNDYyOTE3MH0.QAAbYHymeJbTVyihjyUMXRVBNbKKxmmcD1SwijJsUK0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/posts?cursor=MjAyNC0wMy0yMFQwNzo0NTowMC4wMDBaXzEw&limit=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "cursor",
+							"value": "MjAyNC0wMy0yMFQwNzo0NTowMC4wMDBaXzEw"
+						},
+						{
+							"key": "limit",
+							"value": "10",
+							"description": "default are 10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get posts by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJmZXJyZWx0ZXN0IiwiaWF0IjoxNzM0NjE1MDAwLCJleHAiOjE3MzQ2MjIyMDB9.IbXGh_0U3ZVq8bEt33qD03g-ubGpVoIvcNMP11MNsmA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/posts/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "31"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get comments by post id with pagination",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJmZXJyZWx0ZXN0IiwiaWF0IjoxNzM0NjE1MDAwLCJleHAiOjE3MzQ2MjIyMDB9.IbXGh_0U3ZVq8bEt33qD03g-ubGpVoIvcNMP11MNsmA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/posts/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "31"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add comments by postId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJmZXJyZWx0ZXN0IiwiaWF0IjoxNzM0NjE1MDAwLCJleHAiOjE3MzQ2MjIyMDB9.IbXGh_0U3ZVq8bEt33qD03g-ubGpVoIvcNMP11MNsmA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"wih keren banget\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/posts/:id/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"posts",
+						":id",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
