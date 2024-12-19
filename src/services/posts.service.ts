@@ -1,4 +1,4 @@
-// import { Comment, NewComment } from '../database/schema/comments';
+import { Comment, NewComment } from '../database/schema/comments';
 import { NewPost, Post } from '../database/schema/posts';
 import { NotFoundError } from '../errors/custom-errors';
 import { CommentsRepository } from '../repositories/comments.repository';
@@ -45,13 +45,31 @@ export class PostsService {
     }
   }
 
-  // async getComments(id: number): Promise<Comment[]> {
-  //   const comments = await this.commentsRepository.findByPostId(id);
-  //   return comments;
-  // }
+  async getComments(
+    id: number,
+    cursor?: string,
+    limit: number = 10,
+  ): Promise<{ comments: Comment[]; hasMore: boolean; nextCursor?: string | null }> {
+    const cursorDate = cursor ? parseCursor(cursor) : null;
+    const { date, id: commentId } = cursorDate || {};
+    const { comments, hasMore } = await this.commentsRepository.findByPostIdPaginated(
+      id,
+      limit,
+      date,
+      commentId,
+    );
 
-  // async createComment(id: number, data: NewComment): Promise<Comment> {
-  //   const comment = await this.commentsRepository.create(id, data);
-  //   return comment;
-  // }
+    return {
+      comments,
+      hasMore,
+      nextCursor: hasMore
+        ? generateCursor(comments[comments.length - 1].createdAt, comments[comments.length - 1].id)
+        : null,
+    };
+  }
+
+  async createComment(id: number, data: NewComment): Promise<Comment> {
+    const comment = await this.commentsRepository.create(id, data);
+    return comment;
+  }
 }

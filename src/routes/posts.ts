@@ -20,7 +20,7 @@ const postsController = new PostsController(postsService, s3Service);
 router.post('/', authenticate, upload.single('file'), postsController.createPost);
 router.get('/', authenticate, postsController.getPosts);
 router.get('/:id', authenticate, postsController.getPost);
-// router.get('/:id/comments', authenticate, postsController.getComments);
-// router.post('/:id/comments', authenticate, postsController.createComment);
+router.get('/:id/comments', authenticate, postsController.getComments);
+router.post('/:id/comments', authenticate, postsController.createComment);
 
 export default router;

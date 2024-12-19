@@ -32,3 +32,7 @@ export const comments = pgTable(
 
 export type Comment = typeof comments.$inferSelect;
 export type NewComment = typeof comments.$inferInsert;
+export type CommentWithUser = typeof comments.$inferSelect & {
+  username: string;
+  avatar: string | null;
+};

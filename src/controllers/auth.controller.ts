@@ -16,11 +16,8 @@ export class AuthController {
 
       const result = await this.authService.login(username, password);
 
-      ResponseUtil.success(res, {
-        message: 'Login successful',
-        data: {
-          token: result,
-        },
+      ResponseUtil.success(res, 'Login successful', {
+        token: result,
       });
     } catch (error) {
       next(error);

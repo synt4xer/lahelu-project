@@ -67,10 +67,7 @@ export class PostsController {
         CompressionService.removeFile(file.path),
       ]);
 
-      ResponseUtil.success(res, {
-        message: 'Post created successfully',
-        data: post,
-      });
+      ResponseUtil.success(res, 'Post created successfully', post);
     } catch (error) {
       next(error);
     }
@@ -83,12 +80,13 @@ export class PostsController {
 
       const { posts, hasMore, nextCursor } = await this.postsService.getPosts(limit, cursor);
 
-      ResponseUtil.success(res, {
-        message: 'Posts fetched successfully',
-        data: posts,
+      ResponseUtil.successWithPagination(
+        res,
+        'Posts fetched successfully',
+        posts,
         hasMore,
         nextCursor,
-      });
+      );
     } catch (error) {
       next(error);
     }
@@ -98,48 +96,53 @@ export class PostsController {
     try {
       const id = parseInt(req.params.id);
       const post = await this.postsService.getPost(id);
-      ResponseUtil.success(res, {
-        message: 'Post fetched successfully',
-        data: post,
-      });
+      ResponseUtil.success(res, 'Post fetched successfully', post);
     } catch (error) {
       next(error);
     }
   };
 
-  // getComments = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const postId = parseInt(req.params.postId);
-  //     const comments = await this.postsService.getComments(postId);
-  //     ResponseUtil.success(res, {
-  //       message: 'Comments fetched successfully',
-  //       data: comments,
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+  getComments = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const postId = parseInt(req.params.id);
+      const cursor = req.query.cursor as string | undefined;
+      const limit = parseInt((req.query.limit as string) || '10');
 
-  // createComment = async (req: RequestWithUser, res: Response, next: NextFunction) => {
-  //   try {
-  //     const postId = parseInt(req.params.postId);
-  //     const userId = req.user?.id;
-  //     const { content } = req.body;
+      const { comments, hasMore, nextCursor } = await this.postsService.getComments(
+        postId,
+        cursor,
+        limit,
+      );
 
-  //     if (!content) {
-  //       throw new ValidationError('Invalid request body');
-  //     }
+      ResponseUtil.successWithPagination(
+        res,
+        'Comments fetched successfully',
+        comments,
+        hasMore,
+        nextCursor,
+      );
+    } catch (error) {
+      next(error);
+    }
+  };
 
-  //     const comment = await this.postsService.createComment(postId, {
-  //       userId,
-  //       content,
-  //     });
-  //     ResponseUtil.success(res, {
-  //       message: 'Comment created successfully',
-  //       data: comment,
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+  createComment = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    try {
+      const postId = parseInt(req.params.id);
+      const userId = req.user?.id;
+      const { content } = req.body;
+
+      if (!content) {
+        throw new ValidationError('Invalid request body');
+      }
+
+      await this.postsService.createComment(postId, {
+        userId,
+        content,
+      });
+      ResponseUtil.success(res, 'Comment created successfully');
+    } catch (error) {
+      next(error);
+    }
+  };
 }
