@@ -1,11 +1,12 @@
 export interface ApiResponse<T> {
   success: boolean;
   data: T | null;
+  hasMore?: boolean;
+  nextCursor?: string | null;
   error: ErrorResponse | null;
   metadata?: {
     timestamp: string;
     path: string;
-    // version: string;
   };
 }
 

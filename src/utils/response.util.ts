@@ -2,15 +2,22 @@ import { Response } from 'express';
 import { ApiResponse, ErrorResponse } from '../types/response.type';
 
 export class ResponseUtil {
-  static success<T>(res: Response, data: T, statusCode: number = 200): void {
+  static success<T>(
+    res: Response,
+    data: T,
+    hasMore?: boolean,
+    nextCursor?: string | null,
+    statusCode: number = 200,
+  ): void {
     const response: ApiResponse<T> = {
       success: true,
       data,
+      hasMore,
+      nextCursor,
       error: null,
       metadata: {
         timestamp: new Date().toISOString(),
         path: res.req.originalUrl,
-        // version: 'v1', // no versioning yet
       },
     };
 
@@ -25,7 +32,6 @@ export class ResponseUtil {
       metadata: {
         timestamp: new Date().toISOString(),
         path: res.req.originalUrl,
-        // version: 'v1', // no versioning yet
       },
     };
 
