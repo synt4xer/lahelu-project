@@ -42,3 +42,6 @@ temp/
 
 # Optional eslint cache
 .eslintcache
+
+# temporary files
+uploads/
