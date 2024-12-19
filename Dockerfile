@@ -1,3 +1,4 @@
+# stage 1: build the app
 FROM node:18.20.5-alpine AS builder
 
 WORKDIR /usr/src/app
@@ -11,12 +12,15 @@ COPY migrations ./migrations
 
 RUN yarn build
 
-
+# stage 2: run the app with production environment, reduce the size of the image
 FROM node:18.20.5-alpine
 
 WORKDIR /usr/src/app
 
 RUN mkdir -p /usr/src/app/uploads
+
+# Install ffmpeg for video compression
+RUN apk add --no-cache ffmpeg
 
 COPY package.json yarn.lock tsconfig.json ./
 
